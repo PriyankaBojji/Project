@@ -1,0 +1,120 @@
+package com.cg.test;
+
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
+
+import java.time.LocalDate;
+
+import junit.framework.Assert;
+
+import org.junit.Test;
+
+import com.cg.bean.BookingDetails;
+import com.cg.bean.Hotel;
+import com.cg.bean.Users;
+import com.cg.dao.BookingDAOImpl;
+
+import com.cg.exception.BookingException;
+import com.cg.exception.InvalidUserException;
+
+
+
+public class BookingTest {
+     
+	String RoomId = "101";
+	BookingDetails roomid = new BookingDetails();
+	
+	String HotelId = "123"; 
+	Hotel hotelid = new Hotel();
+	
+	Users user = new Users();
+	
+	BookingDAOImpl details = new BookingDAOImpl();
+	
+	
+	
+	@Test
+	public void testaddUser(){
+		Users u1 = new Users();
+	
+		u1.setUserName(null);
+		u1.setPassword("102");
+		u1.setMobileNo("9882222462");
+		u1.setPhone("220390");
+		u1.setAddress("address");
+		u1.setEmail("suryaveersen@gmail.com");
+		u1.setRole("customer");
+		
+		
+		BookingDAOImpl dao= new BookingDAOImpl();
+		try {
+			String s= dao.addUser(u1);
+			Assert.assertNotSame(0,s);
+		} catch (BookingException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+	}	
+	@Test
+	public void testaddBookingDetails() throws BookingException{
+		BookingDetails bk=  new BookingDetails();
+		bk.setRoomId("1");
+		bk.setBookedFrom(LocalDate.now());
+		bk.setBookedTo(LocalDate.now());
+		bk.setNumberOfAdults(3);
+		bk.setNumberOfChildren(3);
+		BookingDAOImpl dao= new BookingDAOImpl();
+		try{
+		BookingDetails s= dao.addBookingDetails(bk);
+		Assert.assertNotSame(0,s);
+		} catch (BookingException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+	}	
+	
+	
+
+	
+	@Test
+	public void testAddUserDetails() throws InvalidUserException {
+		
+		try {
+			assertEquals(101, details.addUser(user));
+		} catch (BookingException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+	
+	@Test
+	public void testAddUserDetails1() throws InvalidUserException, BookingException {
+
+		assertNotNull(details.addUser(user));
+
+	}
+	
+
+	
+	@Test
+	public void testRoomId() {
+		assertEquals(RoomId, roomid.getRoomId());
+	}
+	
+	@Test
+	public void testHotelId() {
+		assertEquals(HotelId, hotelid.getHotelId());
+	}
+	
+	@Test
+	public void testUsernameandPassword() {
+		String UserId = "U101";
+		String Password = "Password";
+		
+		assertEquals(UserId, user.getUserId());
+		assertEquals(Password, user.getPassword());
+	}
+	
+}
