@@ -1,0 +1,5 @@
+create table demand_draft(transaction_id number, customer_name varchar2(20), in_favor_of varchar2(20), phone_number varchar2(10), date_of_transaction date, dd_amount number, dd_commission number, dd_description varchar2(50));
+
+create sequence Transaction_Id_Seq start with 10001;
+
+
